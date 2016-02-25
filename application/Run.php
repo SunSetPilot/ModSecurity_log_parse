@@ -1,7 +1,5 @@
 <?php
 class  Run {
-    /*
-     */
     public function init() {
 
         $o_indexlog = new Services_IndexLog();
@@ -10,5 +8,5 @@ class  Run {
             $o_indexlog->addLog();
             sleep(2);
         }
- }
+    }
 }

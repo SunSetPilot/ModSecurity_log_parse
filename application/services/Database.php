@@ -34,7 +34,6 @@ class Services_Database {
     public function getConnection() {
 
         $o_loadfile = new Services_LoadFile();
-//        $o_bootstrap->_initConfig();
         $a_config = $o_loadfile->getConfig();
         $this->a_config = $a_config;
 
@@ -98,11 +97,10 @@ class Services_Database {
                 }
             }
         }
-//        var_dump($rs_result);
         $b_return = $rs_result->execute();
-       if (false===$b_return) {
-           error_log("WARN: INSERT DATE FAILED! SQL:$s_query".date("Y-m-d h:i:s"). "\r\n",3,$this->a_config['error_log']);
-       }
+        if (false===$b_return) {
+            error_log("WARN: INSERT DATE FAILED! SQL:$s_query".date("Y-m-d h:i:s"). "\r\n",3,$this->a_config['error_log']);
+        }
     }
 
     /**

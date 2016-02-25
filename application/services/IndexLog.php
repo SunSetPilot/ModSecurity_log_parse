@@ -53,22 +53,22 @@ class Services_IndexLog {
 //        if ($this->s_end_time===$s_minute_dir) {
         $s_file_path = $this->s_log_dir.'/'.$s_day_dir.'/'.$s_minute_dir;
 //            $s_file_path = $this->s_log_dir.'/'.$s_day_dir.'/'.$s_day_dir;
-            $a_file_name = explode("\n",`ls $s_file_path`);
-            $a_file_name = array_filter($a_file_name);
-            //改为使用缓存
-            foreach ($a_file_name as $s_item) {
-                $s_file_tmp = file_get_contents(FILE_TMP);
-                preg_match("($s_item)",$s_file_tmp,$a_matches);
-                if (empty($a_matches)) {
-                    $s_file =  $s_file_path."/".$s_item;
-                    $o_loadfile->_initModsecAudit($s_file);
-                    $s_auditlog = $o_loadfile->getAuditLog();
-                    $o_auditlog->translate($s_auditlog);
-                    $a_data = $o_auditlog->getData();
-                    $o_database->add($a_data);
-                    file_put_contents(FILE_TMP,$s_item."\r\n",FILE_APPEND);
-                }
+        $a_file_name = explode("\n",`ls $s_file_path`);
+        $a_file_name = array_filter($a_file_name);
+        //改为使用缓存
+        foreach ($a_file_name as $s_item) {
+            $s_file_tmp = file_get_contents(FILE_TMP);
+            preg_match("($s_item)",$s_file_tmp,$a_matches);
+            if (empty($a_matches)) {
+                $s_file =  $s_file_path."/".$s_item;
+                $o_loadfile->_initModsecAudit($s_file);
+                $s_auditlog = $o_loadfile->getAuditLog();
+                $o_auditlog->translate($s_auditlog);
+                $a_data = $o_auditlog->getData();
+                $o_database->add($a_data);
+                file_put_contents(FILE_TMP,$s_item."\r\n",FILE_APPEND);
             }
+        }
 //        } else {
 //            echo '执行时间过长';
 //        }
