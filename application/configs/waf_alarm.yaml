@@ -1,0 +1,11 @@
+---
+auditlog_dir: /html/webapp/waf_alarm/datas/modsec_audit
+error_log: /html/webapp/waf_alarm/datas/logs/waf_auditlog.log
+pid_file: /var/run/waf_auditlog.pid
+db_type: mysql
+db_username: waf_alarm
+db_password: waf_alarm
+db_host: 192.168.25.163
+db_port: 3306
+db_name: waf_alarm_db
+db_table: waf_alarm_table
