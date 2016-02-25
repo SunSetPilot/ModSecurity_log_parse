@@ -53,7 +53,7 @@ class Services_Database {
                 break;
         }
         try {
-            $rs_conn = new PDO($s_db,$s_db_username,$s_db_password);
+            $rs_conn = new PDO($s_db,$s_db_username,$s_db_password, array(PDO::ATTR_PERSISTENT => true));
         } catch (PDOException $e) {
             die(error_log("ERROR: ".$e->getMessage() .date("Y-m-d h:i:s"). "\r\n",3,"$a_config[error_log]"));
         }
@@ -112,12 +112,15 @@ class Services_Database {
      */
     public function checkVal($s_item) {
 //        return true;
-        $res = $this->getConnection();
+        $rs_conn = $this->getConnection();
         $s_db_table = $this->a_config['db_table'];
-        $query="SELECT id FROM $s_db_table WHERE unique_id = '$s_item'";
-        $result=$res->prepare($query);
-        $result->execute();
-        while($res=$result->fetch(PDO::FETCH_ASSOC)){
+        $s_query="SELECT id FROM $s_db_table WHERE unique_id = '$s_item'";
+        $rs_result=$rs_conn->prepare($s_query);
+        $b_return = $rs_result->execute();
+        if (false===$b_return) {
+            error_log("WARN: SELECT DATE FAILED! SQL:$s_query".date("Y-m-d h:i:s"). "\r\n",3,$this->a_config['error_log']);
+        }
+        while($res=$rs_result->fetch(PDO::FETCH_ASSOC)){
             if (isset($res)) {
                 return true;
             }

@@ -22,6 +22,13 @@ defined('APP_ENV')
 
 if (APP_ENV == 'dev') error_reporting(E_ALL ^ E_NOTICE);
 
+defined('WAF_ALARM')
+||define('WAF_ALARM','waf_alarm.yaml');
+
+defined('FILE_TMP')
+||define('FILE_TMP','file.tmp');
+
+
 defined('CONFIGS_PATH')
 ||define('CONFIGS_PATH',APP_PATH.'/configs');
 // Ensure library/ is on include_path

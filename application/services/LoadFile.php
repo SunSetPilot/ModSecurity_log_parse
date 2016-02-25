@@ -7,11 +7,15 @@ class Services_LoadFile {
 
     public function __construct() {
 
-        $a_config = spyc_load_file(CONFIGS_PATH."/waf_alarm.yaml");
+        $a_config = spyc_load_file(CONFIGS_PATH."/".WAF_ALARM);
         $this->a_config = $a_config;
 
     }
 
+    /**
+     * 载入日志文件
+     * @param $s_file
+     */
     public function _initModsecAudit($s_file) {
 
         $s_file = trim($s_file);

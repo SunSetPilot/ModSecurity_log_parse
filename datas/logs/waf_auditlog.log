@@ -1,0 +1,9 @@
+WARN: SELECT DATE FAILED! SQL:SELECTs id FROM waf_alarm_table WHERE unique_id = 'VoLbXH8AAAEAABQVW@0AABKU'2016-02-25 03:21:45
+WARN: SELECT DATE FAILED! SQL:SELECTs id FROM waf_alarm_table WHERE unique_id = 'VoLbXH8AAAEAABVOX@8AABTA'2016-02-25 03:21:45
+WARN: SELECT DATE FAILED! SQL:SELECTs id FROM waf_alarm_table WHERE unique_id = 'VoLeF38AAAEAACiegNEAAAAA'2016-02-25 03:21:45
+WARN: SELECT DATE FAILED! SQL:SELECTs id FROM waf_alarm_table WHERE unique_id = 'VoLtesta'2016-02-25 03:21:45
+WARN: SELECT DATE FAILED! SQL:SELECTs id FROM waf_alarm_table WHERE unique_id = 'VoLtestb'2016-02-25 03:21:45
+WARN: SELECT DATE FAILED! SQL:SELECTs id FROM waf_alarm_table WHERE unique_id = 'VoLtestc'2016-02-25 03:21:45
+WARN: SELECT DATE FAILED! SQL:SELECTs id FROM waf_alarm_table WHERE unique_id = 'VoLtestd'2016-02-25 03:21:45
+WARN: SELECT DATE FAILED! SQL:SELECTs id FROM waf_alarm_table WHERE unique_id = 'VoLteste'2016-02-25 03:21:45
+Could not open input file: /html/webapp/waf_alarm/app/index.php

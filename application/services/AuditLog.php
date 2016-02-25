@@ -4,7 +4,7 @@ class Services_AuditLog {
     private $data;
 
     /**
-     * 解析源日志文件
+     * 解析源日志文件(日志内容移位关键字变更会导致解析出错)
      */
     function translate($s_auditlog) {
 
@@ -54,20 +54,24 @@ class Services_AuditLog {
                 $s_Hauditlog .= $a_matchs[0][$s_key];
             }
         }
-        $a_fa = $this->fomateA($s_Aauditlog);
-        $a_fb = $this->fomateB($s_Bauditlog);
-        $a_fh = $this->fomateH($s_Hauditlog);
-        $a_ff = $this->fomateF($s_Fauditlog);
+        $a_fa = $this->formatA($s_Aauditlog);
+        $a_fb = $this->formatB($s_Bauditlog);
+        $a_fh = $this->formatH($s_Hauditlog);
+        $a_ff = $this->formatF($s_Fauditlog);
         $a_merg = array_merge($a_fa,$a_fb,$a_fh,$a_ff);
-//        print_r($a_merg);
         $this->data = $a_merg;
     }
 
-    public function fomateA ($s_Aauditlog) {
+    /**
+     * A块处理
+     * @param $s_Aauditlog
+     * @return array
+     */
+    public function formatA ($s_Aauditlog) {
 
         preg_match('(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})',$s_Aauditlog,$a_happentime);
         $a_tmp = explode(' ',$s_Aauditlog);
-        $a_fomateA = array(
+        $a_formatA = array(
             'happentime' => $a_happentime[0],
             'uniqueId' => $a_tmp[2],
             'sip' => $a_tmp[3],
@@ -75,10 +79,15 @@ class Services_AuditLog {
             'dip' => $a_tmp[5],
             'dport' => $a_tmp[6],
         );
-//        print_r($a_fomateA);
-        return $a_fomateA;
+        return $a_formatA;
 }
-        public function fomateB ($s_Bauditlog) {
+
+    /**
+     * B块处理
+     * @param $s_Bauditlog
+     * @return array
+     */
+        public function formatB ($s_Bauditlog) {
 
             preg_match('(Host:.*)',$s_Bauditlog,$a_host);
             preg_match('(GET.* |POST.*)',$s_Bauditlog,$a_url);
@@ -91,15 +100,20 @@ class Services_AuditLog {
                 $s_url = str_replace("GET ","",$a_url[0]);
             }
             $s_agent = str_replace("User-Agent:","",$a_agent[0]);
-            $a_formateB = array(
+            $a_formatB = array(
                 'hostname' => $s_host,
                 'url' => $s_url,
                 'userAgent' => $s_agent,
             );
-//            print_r($a_formateB);
-            return $a_formateB;
+            return $a_formatB;
 }
-        public function fomateH ($s_Hauditlog) {
+
+    /**
+     * H块处理
+     * @param $s_Hauditlog
+     * @return array
+     */
+        public function formatH ($s_Hauditlog) {
 
             preg_match('(\[.*\])',$s_Hauditlog,$a_message);
             $a_tmp = explode('"]',$a_message[0]);
@@ -108,27 +122,35 @@ class Services_AuditLog {
             $s_date = str_replace("[data \"","",$a_tmp[2]);
             $s_severity = str_replace("[severity \"","",$a_tmp[3]);
             $s_tag = str_replace("[tag \"","",$a_tmp[4]);
-            $a_formateH = array(
+            $a_formatH = array(
                 'ruleId' => $s_id,
                 'msgId' => $s_msg,
                 'matchs' => $s_date,
                 'severityId' => $s_severity,
                 'tagId' => $s_tag,
             );
-//            print_r($a_formateH);
-            return $a_formateH;
+            return $a_formatH;
 }
-        public function fomateF ($s_Fauditlog) {
+
+    /**
+     * F块处理
+     * @param $s_Fauditlog
+     * @return array
+     */
+        public function formatF ($s_Fauditlog) {
 
             preg_match('(HTTP.*)',$s_Fauditlog,$a_response_code);
             $a_response_code = explode(' ',$a_response_code[0]);
-            $a_formateF = array(
+            $a_formatF = array(
                 'responseCode' => $a_response_code[1],
             );
-//            print_r($a_formateF);
-            return $a_formateF;
+            return $a_formatF;
 }
 
+    /**
+     * 返回处理后的日志文件
+     * @return mixed
+     */
     public function getData() {
         return $this->data;
     }
