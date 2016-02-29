@@ -26,16 +26,27 @@ class Services_AuditLog {
         $s_Fauditlog = null;
         $s_Hauditlog = null;
 
+        $s_Aflag = true;
+        $s_Bflag = false;
+        $s_Fflag = false;
+        $s_Hflag = false;
+
+
         foreach($a_matchs[0] as $s_key=>$s_val){
 
-            preg_match('(-A--)',$s_val,$a_A);
-            preg_match('(-B--)',$s_val,$a_B);
-            preg_match('(-F--)',$s_val,$a_F);
-            preg_match('(-H--)',$s_val,$a_H);
-            preg_match('(-Z--)',$s_val,$a_Z);
-            if (!empty($a_A)) {
-                $s_Aflag = true;
+            if (true==$s_Aflag) {
+                preg_match('(-B--)',$s_val,$a_B);
             }
+            if (true==$s_Bflag) {
+                preg_match('(-F--)',$s_val,$a_F);
+            }
+            if (true==$s_Fflag) {
+                preg_match('(-H--)',$s_val,$a_H);
+            }
+            if (true==$s_Hflag) {
+                preg_match('(-Z--)',$s_val,$a_Z);
+            }
+
             if (!empty($a_B)) {
                 $s_Bflag = true;
                 $s_Aflag = false;
@@ -182,3 +193,4 @@ class Services_AuditLog {
         }
     }
 }
+

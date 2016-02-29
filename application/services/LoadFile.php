@@ -7,7 +7,11 @@ class Services_LoadFile {
 
     public function __construct() {
 
-        $a_config = spyc_load_file(CONFIGS_PATH."/".WAF_ALARM);
+        if (true===extension_loaded('yaml')) {
+            $a_config = yaml_parse_file(CONFIGS_PATH."/".WAF_ALARM);
+        } else {
+            $a_config = spyc_load_file(CONFIGS_PATH."/".WAF_ALARM);
+        }
         $this->a_config = $a_config;
 
     }

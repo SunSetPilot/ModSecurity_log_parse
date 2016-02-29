@@ -4,9 +4,9 @@ class  Run {
 
         $o_indexlog = new Services_IndexLog();
         $o_indexlog->indexLog();
-        while(true){
+//        while(true){
             $o_indexlog->addLog();
-            sleep(2);
-        }
+//            sleep(2);
+//        }
     }
 }
