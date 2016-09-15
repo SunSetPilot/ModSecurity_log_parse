@@ -1,5 +1,8 @@
 # waf_alarm
-ModSecurity日志解析程序</br>
-启动程序：/scripts/waf_auditlog start</br>
-停止程序：/scripts/waf_auditlog stop</br>
-重启程序：/scripts/waf_auditlog restart</br>
+ModSecurity log parse project</br>
+this project is used to format ModSecurity  generate log and inserted ModSecurity log into to mysql database</br>
+this project is background program,i was write script shell control service</br>
+
+service start：/scripts/waf_auditlog start</br>
+service stop：/scripts/waf_auditlog stop</br>
+service restart：/scripts/waf_auditlog restart</br>
