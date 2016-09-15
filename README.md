@@ -1,4 +1,4 @@
-# waf_alarm
+# ModSecurity log parse
 ModSecurity log parse project</br>
 this project is used to format ModSecurity  generate log and inserted ModSecurity log into to mysql database</br>
 this project is background program,i was write script waf_auditlog to control service</br>
